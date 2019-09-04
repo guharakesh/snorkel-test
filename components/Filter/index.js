@@ -2,23 +2,24 @@ import { useState } from 'react';
 import Card from '../Card';
 import Chip from '../Chip';
 import Input from '../Input';
+
+import { getQuotes, stripQuotes } from './utils';
+
 import sentences from '../../sentences.json';
 
 export default () => {
   const [queries, setQueries] = useState([]);
 
   const handleChange = ({ target: { value: input } }) => {
-    const regex = /(["'])(\2.)*?\1/g;
-    const quoted = (input.match(regex) || ['""']);
-    
-    const noquotes = quoted.reduce((acc, value) => acc.replace(value, ''), input);
+    const quotes = getQuotes(input);
+    const noquotes = stripQuotes(input);
 
     setQueries([
-      ...quoted.map(value => value.slice(1, -1)),
+      ...quotes,
       ...noquotes.split(' '),
     ]
-      .filter(value => value)
-      .map(value => value.toLowerCase().trim())
+      .filter(value => value) // remove empty values
+      .map(value => value.toLowerCase().trim()) 
     );
   };
 
