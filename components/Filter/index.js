@@ -24,7 +24,9 @@ export default () => {
 
   const chips = (() =>
     sentences
-      .filter(({ data }) => queries.length && queries.every(value => data.includes(value)))
+      .filter(({ data }) => queries.length && queries.every(value => data
+        .toLowerCase()
+        .includes(value)))
       .map(({ id, data }) => <Chip key={id}>{data}</Chip>)
   )();
 
