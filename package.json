@@ -10,7 +10,7 @@
     "deploy": "now"
   },
   "dependencies": {
-    "next": "9.0.5",
+    "next": "9.3.2",
     "now": "^16.1.3",
     "ramda": "^0.26.1",
     "react": "16.9.0",
